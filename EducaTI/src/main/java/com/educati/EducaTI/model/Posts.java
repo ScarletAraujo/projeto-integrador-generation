@@ -24,23 +24,18 @@ public class Posts {
 	private Long idPosts;
 	
 	@NotNull
-	@Size(min=10 , max=1000)
+	@Size(min=10 , max=5000)
 	private String textoPosts;
 	
 	@NotNull
 	@Size(min=1 , max=45)
 	private String tituloPosts;
 	
-	@NotNull
-	@Size(min=1 , max=1000)
+	@Size(max=1000)
 	private String multimPosts;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataPosts = new java.sql.Date(System.currentTimeMillis());
-	
-	@NotNull
-	@Size(min=1 , max=45)
-	private String nivelTema;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("posts")
@@ -88,14 +83,6 @@ public class Posts {
 
 	public void setDataPosts(Date dataPosts) {
 		this.dataPosts = dataPosts;
-	}
-
-	public String getNivelTema() {
-		return nivelTema;
-	}
-
-	public void setNivelTema(String nivelTema) {
-		this.nivelTema = nivelTema;
 	}
 
 	public Temas getTemas() {
