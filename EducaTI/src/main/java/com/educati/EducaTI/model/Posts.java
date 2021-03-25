@@ -42,13 +42,13 @@ public class Posts {
 	@Size(min=1 , max=45)
 	private String nivelTema;
 	
-	/*@ManyToOne
+	@ManyToOne
 	@JsonIgnoreProperties("Posts")
 	private Temas temas;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("Posts")
-	private Usuario usuario;*/
+	private Usuario usuario;
 
 	public Long getIdPosts() {
 		return idPosts;
@@ -98,7 +98,7 @@ public class Posts {
 		this.nivelTema = nivelTema;
 	}
 
-	/*public Temas getTemas() {
+	public Temas getTemas() {
 		return temas;
 	}
 
@@ -112,6 +112,6 @@ public class Posts {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}*/
+	}
 
 }
