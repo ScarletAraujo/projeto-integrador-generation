@@ -1,11 +1,12 @@
 package com.educati.EducaTI.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@Table(name = "Temas", uniqueConstraints = @UniqueConstraint(columnNames={"id","nomeTemas"}) )
+@Table(name = "Temas", uniqueConstraints = @UniqueConstraint(columnNames={"id","titulo"}) )
 public class Temas {
 
 	@Id
@@ -36,7 +37,7 @@ public class Temas {
 	
 	@OneToMany(mappedBy = "temas", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("temas")
-	private Posts posts;
+	private List<Posts> posts;
 
 	public Long getId() {
 		return id;
@@ -70,11 +71,13 @@ public class Temas {
 		this.nivel = nivel;
 	}
 
-	public Posts getPosts() {
+	public List<Posts> getPosts() {
 		return posts;
 	}
 
-	public void setPosts(Posts posts) {
+	public void setPosts(List<Posts> posts) {
 		this.posts = posts;
 	}
+
+	
 }
