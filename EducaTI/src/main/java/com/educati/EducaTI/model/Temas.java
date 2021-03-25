@@ -20,11 +20,8 @@ public class Temas {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@ManyToMany(mappedBy = "idUsuario" , cascade = CascadeType.ALL)
-	//@JsonIgnoreProperties("idUsuario")
 	private Long id;
 	
-	//@OneToMany(mappedBy = "nomeTemas")
 	private String nomeTemas;
 
 	public Long getId() {
