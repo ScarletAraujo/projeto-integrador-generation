@@ -2,14 +2,22 @@ package com.educati.EducaTI.model;
 
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Usuario", uniqueConstraints= @UniqueConstraint(columnNames={"nome", "email", "CPF"}))
@@ -36,13 +44,22 @@ public class Usuario {
 	
 	@NotNull
 	@Size (min = 11, max = 11)
-	private int CPF;
+	private String CPF;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Inscrição", 
+				joinColumns = 
+					@JoinColumn(name = "usuarioId"),
+				inverseJoinColumns = 	
+					@JoinColumn(name = "temaId"))
+	@JsonIgnoreProperties({"usuariosInscritos"})
+	private List<Temas> temasInscritos;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -70,14 +87,23 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(int cPF) {
-		CPF = cPF;
-	} 
-	
+	public void setCPF(String CPF) {
+		this.CPF = CPF;
+	}
+
+	public List<Temas> getTemasInscritos() {
+		return temasInscritos;
+	}
+
+	public void setTemasInscritos(List<Temas> temasInscritos) {
+		this.temasInscritos = temasInscritos;
+	}
+
+
 	
 	
 

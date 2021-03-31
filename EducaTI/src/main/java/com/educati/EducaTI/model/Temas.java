@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -38,6 +39,10 @@ public class Temas {
 	@OneToMany(mappedBy = "temas", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("temas")
 	private List<Posts> posts;
+	
+	@ManyToMany(mappedBy = "temasInscritos", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"senha","email","CPF","temasInscritos"})
+	private List<Usuario> usuariosInscritos;
 
 	public Long getId() {
 		return id;
@@ -77,6 +82,14 @@ public class Temas {
 
 	public void setPosts(List<Posts> posts) {
 		this.posts = posts;
+	}
+
+	public List<Usuario> getUsuariosInscritos() {
+		return usuariosInscritos;
+	}
+
+	public void setUsuariosInscritos(List<Usuario> usuariosInscritos) {
+		this.usuariosInscritos = usuariosInscritos;
 	}
 
 	
