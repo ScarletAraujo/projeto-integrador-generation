@@ -43,9 +43,6 @@ public class Usuario {
 	@Size (min = 6, max = 1000)
 	private String senha;
 	
-	@NotNull
-	@Size (min = 11, max = 11)
-	private String CPF;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Inscrição", 
@@ -94,13 +91,6 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getCPF() {
-		return CPF;
-	}
-
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
-	}
 
 	public List<Temas> getTemasInscritos() {
 		return temasInscritos;
