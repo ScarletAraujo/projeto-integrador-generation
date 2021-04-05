@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -54,6 +55,12 @@ public class Usuario {
 					@JoinColumn(name = "temaId"))
 	@JsonIgnoreProperties({"usuariosInscritos"})
 	private List<Temas> temasInscritos;
+	
+	
+	@OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuarioCriador")
+	private List<Posts> postsUsuario;
+
 
 	public Long getId() {
 		return id;
@@ -103,7 +110,15 @@ public class Usuario {
 		this.temasInscritos = temasInscritos;
 	}
 
+	public List<Posts> getPostsUsuario() {
+		return postsUsuario;
+	}
 
+	public void setPostsUsuario(List<Posts> postsUsuario) {
+		this.postsUsuario = postsUsuario;
+	}
+
+	
 	
 	
 

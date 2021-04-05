@@ -41,10 +41,10 @@ public class Posts {
 	@JsonIgnoreProperties("posts")
 	private Temas temas;
 	
-	/*@ManyToOne
-	@JsonIgnoreProperties("Posts")
-	private Usuario usuario;
-*/
+	@ManyToOne
+	@JsonIgnoreProperties({"postsUsuario", "senha","CPF","email"})
+	private Usuario usuarioCriador;
+
 	public Long getIdPosts() {
 		return idPosts;
 	}
@@ -93,13 +93,15 @@ public class Posts {
 		this.temas = temas;
 	}
 
-	/*public Usuario getUsuario() {
-		return usuario;
+	public Usuario getUsuarioCriador() {
+		return usuarioCriador;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioCriador(Usuario usuarioCriador) {
+		this.usuarioCriador = usuarioCriador;
 	}
-	*/
+	
+	
+	
 
 }
