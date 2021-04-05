@@ -47,11 +47,6 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>>getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
-	@GetMapping("/CPF/{CPF}")
-	public ResponseEntity<List<Usuario>>getByCPF(@PathVariable String CPF){
-		return ResponseEntity.ok(repository.findAllByCPFContaining(CPF));
-	}
-	
 	
 	
 	@PostMapping
