@@ -107,9 +107,4 @@ public class Usuario {
 	public void setPostsUsuario(List<Posts> postsUsuario) {
 		this.postsUsuario = postsUsuario;
 	}
-
-	
-	
-	
-
 }
