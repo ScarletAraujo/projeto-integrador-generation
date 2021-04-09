@@ -23,7 +23,7 @@ import com.educati.EducaTI.services.UsuarioServices;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/Usuario")
+@RequestMapping("/usuario")
 
 public class UsuarioController {
 	
@@ -49,7 +49,7 @@ public class UsuarioController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<?> post (@RequestBody Usuario usuario){
 		return service.cadastroUsuario(usuario);
 	}
