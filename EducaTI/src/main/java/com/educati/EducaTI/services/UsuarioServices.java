@@ -9,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.educati.EducaTI.model.Posts;
 import com.educati.EducaTI.model.Usuario;
 import com.educati.EducaTI.model.UsuarioLogin;
+import com.educati.EducaTI.repository.PostsRepository;
 import com.educati.EducaTI.repository.UsuarioRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class UsuarioServices {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private PostsRepository postsRepository;
 	
 	
 	public Optional<Usuario> cadastroUsuario(Usuario novoUsuario) {
@@ -62,6 +68,11 @@ public class UsuarioServices {
 		}
 		
 	}
+	
+	public Optional<Usuario> criarPost(Posts postNovo, Long idUsuario ){
+		return null;
+	}
+	
 	
 
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educati.EducaTI.model.Posts;
-import com.educati.EducaTI.model.Posts;
 import com.educati.EducaTI.repository.PostsRepository;
 
 @RestController

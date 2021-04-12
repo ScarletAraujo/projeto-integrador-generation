@@ -42,7 +42,7 @@ public class Posts {
 	private Temas temas;
 	
 	@ManyToOne
-	@JsonIgnoreProperties({"postsUsuario", "senha","CPF","email"})
+	@JsonIgnoreProperties({"postsUsuario", "senha","email"})
 	private Usuario usuarioCriador;
 
 	public Long getIdPosts() {
