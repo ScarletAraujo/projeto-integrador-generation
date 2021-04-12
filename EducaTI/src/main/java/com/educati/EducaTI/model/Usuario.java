@@ -50,7 +50,7 @@ public class Usuario {
 					@JoinColumn(name = "usuarioId"),
 				inverseJoinColumns = 	
 					@JoinColumn(name = "temaId"))
-	@JsonIgnoreProperties({"usuariosInscritos"})
+	@JsonIgnoreProperties({"usuariosInscritos","posts"})
 	private List<Temas> temasInscritos;
 	
 	

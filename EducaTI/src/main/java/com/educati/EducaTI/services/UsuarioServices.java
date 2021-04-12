@@ -35,7 +35,7 @@ public class UsuarioServices {
 			return Optional.ofNullable(usuarioRepository.save(novoUsuario));
 		}
 		else {
-			return null;
+			return Optional.empty();
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class UsuarioServices {
 		Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.get().getEmail());
 		
 		if(usuarioExistente.isEmpty()) {
-			return null;
+			return Optional.empty();
 		}
 		else {
 			if (encoder.matches(usuario.get().getSenha(), usuarioExistente.get().getSenha())) {
@@ -62,7 +62,7 @@ public class UsuarioServices {
 			}
 			else {
 				
-				return null;
+				return Optional.empty();
 			}
 			
 		}
