@@ -70,7 +70,14 @@ public class UsuarioServices {
 	}
 	
 	public Optional<Usuario> criarPost(Posts postNovo, Long idUsuario ){
-		return null;
+		if (usuarioRepository.findById(idUsuario).isPresent()) {
+			postNovo.setUsuarioCriador(usuarioRepository.findById(idUsuario).get());
+			postsRepository.save(postNovo);
+			return usuarioRepository.findById(idUsuario);
+		} 
+		else {
+			return Optional.empty();
+		}
 	}
 	
 	

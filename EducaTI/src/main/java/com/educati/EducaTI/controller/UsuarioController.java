@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.educati.EducaTI.model.Posts;
 import com.educati.EducaTI.model.Usuario;
 import com.educati.EducaTI.model.UsuarioLogin;
 import com.educati.EducaTI.repository.UsuarioRepository;
@@ -80,6 +80,17 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
+	}
+	
+	@PostMapping("/cadastrar/{id}/post")
+	public ResponseEntity<?> criarPost(@RequestBody Posts posts, @PathVariable Long id){
+		Optional<Usuario> postNovo = service.criarPost(posts, id);
+			if (postNovo.isPresent()) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(postNovo);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro: Conta não existe.");
+			}	
 	}
 	
 }
