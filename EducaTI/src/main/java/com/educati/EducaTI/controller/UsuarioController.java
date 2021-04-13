@@ -20,6 +20,7 @@ import com.educati.EducaTI.model.Posts;
 import com.educati.EducaTI.model.Temas;
 import com.educati.EducaTI.model.Usuario;
 import com.educati.EducaTI.model.UsuarioLogin;
+import com.educati.EducaTI.repository.PostsRepository;
 import com.educati.EducaTI.repository.TemasRepository;
 import com.educati.EducaTI.repository.UsuarioRepository;
 import com.educati.EducaTI.services.UsuarioServices;
@@ -35,6 +36,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private TemasRepository temasRepository;
+	
+	@Autowired
+	private PostsRepository postRepository; 
 	
 	@Autowired
 	UsuarioServices service;
@@ -115,6 +119,13 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
+	}
+	
+	@DeleteMapping("/post/{idUsuario}/{idPost}")
+	public void delete(@PathVariable Long idUsuario, @PathVariable Long idPost){
+		if (postRepository.findById(idPost).isPresent()) {
+		service.deletarPost(idPost, idUsuario);
+		}
 	}
 	
 	
