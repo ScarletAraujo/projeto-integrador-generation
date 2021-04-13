@@ -98,6 +98,15 @@ public class UsuarioServices {
 			return usuarioExistente;
 		}
 	}
+	public void deletarPost(Long idPost, Long idUsuario) {
+		Usuario criadorValido = postsRepository.findById(idPost).get().getUsuarioCriador();
+		Usuario usuarioExistente = usuarioRepository.findById(idUsuario).get();
+		
+		if (criadorValido.equals(usuarioExistente)){
+			postsRepository.deleteById(idPost); 
+		}
+		
+	}
 	
 	
 
