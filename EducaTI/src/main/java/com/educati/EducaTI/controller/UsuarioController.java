@@ -117,6 +117,11 @@ public class UsuarioController {
 		repository.deleteById(id);
 	}
 	
+	@DeleteMapping("/post/{idUsuario}/{idPost}")
+	public void delete(@PathVariable Long idUsuario, @PathVariable Long idPost) {
+		service.deletarPost(idPost, idUsuario);
+	}
+	
 	
 	
 }
