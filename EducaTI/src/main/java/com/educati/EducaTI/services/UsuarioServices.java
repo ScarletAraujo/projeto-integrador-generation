@@ -5,15 +5,15 @@ import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.educati.EducaTI.model.Posts;
+import com.educati.EducaTI.model.Temas;
 import com.educati.EducaTI.model.Usuario;
 import com.educati.EducaTI.model.UsuarioLogin;
 import com.educati.EducaTI.repository.PostsRepository;
+import com.educati.EducaTI.repository.TemasRepository;
 import com.educati.EducaTI.repository.UsuarioRepository;
 
 @Service
@@ -24,6 +24,9 @@ public class UsuarioServices {
 	
 	@Autowired
 	private PostsRepository postsRepository;
+	
+	@Autowired
+	private TemasRepository temasRepository;
 	
 	
 	public Optional<Usuario> cadastroUsuario(Usuario novoUsuario) {
@@ -73,10 +76,26 @@ public class UsuarioServices {
 		if (usuarioRepository.findById(idUsuario).isPresent()) {
 			postNovo.setUsuarioCriador(usuarioRepository.findById(idUsuario).get());
 			postsRepository.save(postNovo);
+			
 			return usuarioRepository.findById(idUsuario);
 		} 
 		else {
 			return Optional.empty();
+		}
+	}
+	
+	public Optional<Usuario> inscreverTema(Long idTema, Long idUsuario){
+		Optional<Usuario> usuarioExistente = usuarioRepository.findById(idUsuario);
+		Optional<Temas> temaExistente = temasRepository.findById(idTema); 
+		if (usuarioExistente.get().getTemasInscritos().contains(temaExistente.get())) {
+
+			return Optional.empty();
+		}
+		else {
+			usuarioExistente.get().getTemasInscritos().add(temaExistente.get());
+			temaExistente.get().getUsuariosInscritos().add(usuarioExistente.get());
+			
+			return usuarioExistente;
 		}
 	}
 	
