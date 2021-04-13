@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educati.EducaTI.model.Posts;
+import com.educati.EducaTI.model.Temas;
 import com.educati.EducaTI.model.Usuario;
 import com.educati.EducaTI.model.UsuarioLogin;
+import com.educati.EducaTI.repository.TemasRepository;
 import com.educati.EducaTI.repository.UsuarioRepository;
 import com.educati.EducaTI.services.UsuarioServices;
 
@@ -30,6 +32,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private TemasRepository temasRepository;
 	
 	@Autowired
 	UsuarioServices service;
@@ -72,16 +77,7 @@ public class UsuarioController {
 			}
 	}
 	
-	@PutMapping
-	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario){
-		return  ResponseEntity.ok(repository.save(usuario));
-	}
-	
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
-		repository.deleteById(id);
-	}
-	
+		
 	@PostMapping("/cadastrar/{id}/post")
 	public ResponseEntity<?> criarPost(@RequestBody Posts posts, @PathVariable Long id){
 		Optional<Usuario> postNovo = service.criarPost(posts, id);
@@ -92,5 +88,35 @@ public class UsuarioController {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro: Conta não existe.");
 			}	
 	}
+	
+	@PutMapping("/inscricao/{idTema}/{idUsuario}")
+	public ResponseEntity<?> inscreverTema(@PathVariable Long idTema, @PathVariable Long idUsuario){
+		
+		Optional<Usuario> usuarioValido = repository.findById(idUsuario);
+		Optional<Temas> temaValido = temasRepository.findById(idTema);
+		
+		if(usuarioValido.isPresent() && temaValido.isPresent()){
+		
+			return ResponseEntity.ok(service.inscreverTema(idTema, idUsuario));
+		
+		}else {
+			
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Usuario e/ou tema não cadastrado!");
+			
+		}
+		
+	}
+	
+	@PutMapping
+	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario){
+		return  ResponseEntity.ok(repository.save(usuario));
+	}
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		repository.deleteById(id);
+	}
+	
+	
 	
 }
