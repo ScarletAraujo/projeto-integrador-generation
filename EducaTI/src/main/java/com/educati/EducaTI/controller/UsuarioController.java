@@ -25,6 +25,8 @@ import com.educati.EducaTI.repository.TemasRepository;
 import com.educati.EducaTI.repository.UsuarioRepository;
 import com.educati.EducaTI.services.UsuarioServices;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/usuario")
@@ -45,22 +47,26 @@ public class UsuarioController {
 		
 	
 	@GetMapping
+	@ApiOperation(value="Retorna uma lista de Usuário")
 	public ResponseEntity<List<Usuario>>getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
+	@ApiOperation(value="Usuário selecionado por id")
 	public ResponseEntity<Usuario>getById(@PathVariable Long id){
 		return repository.findById(id).map(usuario -> ResponseEntity.ok(usuario))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/nome/{nome}")
+	@ApiOperation(value="Retorna lista de Usuário por nome")
 	public ResponseEntity<List<Usuario>>getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@PostMapping("/cadastrar")
+	@ApiOperation(value="Cadastra um Usuário")
 	public ResponseEntity<?> cadastro(@RequestBody Usuario usuario){
 		Optional<Usuario> novoUsuario = service.cadastroUsuario(usuario);
 			if (novoUsuario.isPresent()) {
@@ -72,6 +78,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/login")
+	@ApiOperation(value="Realiza o login do Usuário")
 	public ResponseEntity<?> logar(@RequestBody Optional<UsuarioLogin> usuarioConnect){
 		Optional<UsuarioLogin> novoLogin = service.loginUsuario(usuarioConnect);
 			if (novoLogin.isPresent()) {
@@ -83,6 +90,7 @@ public class UsuarioController {
 	
 		
 	@PostMapping("/cadastrar/{id}/post")
+	@ApiOperation(value="Post criado por um Usuário")
 	public ResponseEntity<?> criarPost(@RequestBody Posts posts, @PathVariable Long id){
 		Optional<Usuario> postNovo = service.criarPost(posts, id);
 			if (postNovo.isPresent()) {
@@ -94,6 +102,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/inscricao/{idTema}/{idUsuario}")
+	@ApiOperation(value="Usuário inscreve um Tema")
 	public ResponseEntity<?> inscreverTema(@PathVariable Long idTema, @PathVariable Long idUsuario){
 		
 		Optional<Usuario> usuarioValido = repository.findById(idUsuario);
@@ -112,16 +121,19 @@ public class UsuarioController {
 	}
 	
 	@PutMapping
+	@ApiOperation(value="Atualiza dados do Usuário")
 	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario){
 		return  ResponseEntity.ok(repository.save(usuario));
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value="Usuário deletado por id")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
 	
 	@DeleteMapping("/post/{idUsuario}/{idPost}")
+	@ApiOperation(value="Deleta Post de Usuário")
 	public void delete(@PathVariable Long idUsuario, @PathVariable Long idPost){
 		if (postRepository.findById(idPost).isPresent()) {
 		service.deletarPost(idPost, idUsuario);
