@@ -43,6 +43,7 @@ public class Usuario {
 	@Size (min = 6, max = 255)
 	private String senha;
 	
+	private String foto;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Inscrição", 
@@ -107,4 +108,14 @@ public class Usuario {
 	public void setPostsUsuario(List<Posts> postsUsuario) {
 		this.postsUsuario = postsUsuario;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	
 }
