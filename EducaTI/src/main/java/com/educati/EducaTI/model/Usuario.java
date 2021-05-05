@@ -55,7 +55,7 @@ public class Usuario {
 	private List<Temas> temasInscritos;
 	
 	
-	@OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuarioCriador")
 	private List<Posts> postsUsuario;
 

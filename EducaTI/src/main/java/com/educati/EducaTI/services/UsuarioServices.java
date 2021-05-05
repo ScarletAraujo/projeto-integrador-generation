@@ -60,6 +60,7 @@ public class UsuarioServices {
 				usuario.get().setNome(usuarioExistente.get().getNome());
 				usuario.get().setEmail(usuarioExistente.get().getEmail());
 				usuario.get().setSenha(usuarioExistente.get().getSenha());
+				usuario.get().setFoto(usuarioExistente.get().getFoto());
 				
 				return usuario;
 			}
