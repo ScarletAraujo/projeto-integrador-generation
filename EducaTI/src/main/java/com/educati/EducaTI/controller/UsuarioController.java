@@ -101,7 +101,7 @@ public class UsuarioController {
 			}	
 	}
 	
-	@PutMapping("/inscricao/{idTema}/{idUsuario}")
+	@PostMapping("/inscricao/{idTema}/{idUsuario}")
 	@ApiOperation(value="Usuário inscreve um Tema")
 	public ResponseEntity<?> inscreverTema(@PathVariable Long idTema, @PathVariable Long idUsuario){
 		
