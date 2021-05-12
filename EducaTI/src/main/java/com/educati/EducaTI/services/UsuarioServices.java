@@ -42,6 +42,14 @@ public class UsuarioServices {
 		}
 	}
 	
+	public Optional<Usuario> atualizaUsuario(Usuario usuario){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String senhaEncoder = encoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaEncoder);
+		
+		return Optional.ofNullable(usuarioRepository.save(usuario));
+	}
+	
 	public Optional<UsuarioLogin> loginUsuario(Optional<UsuarioLogin> usuario){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.get().getEmail());

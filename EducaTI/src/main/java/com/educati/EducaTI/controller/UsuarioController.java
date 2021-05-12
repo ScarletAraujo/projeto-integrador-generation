@@ -122,8 +122,8 @@ public class UsuarioController {
 	
 	@PutMapping
 	@ApiOperation(value="Atualiza dados do Usuário")
-	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario){
-		return  ResponseEntity.ok(repository.save(usuario));
+	public ResponseEntity<?> put(@RequestBody Usuario usuario){
+		return  ResponseEntity.ok(service.atualizaUsuario(usuario));
 	}
 	
 	@DeleteMapping("/{id}")
